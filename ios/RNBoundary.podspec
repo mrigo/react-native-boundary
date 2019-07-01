@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "RNBoundary"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "RNBoundary"
   s.description  = <<-DESC
                   RNBoundary
