@@ -18,11 +18,12 @@ RCT_EXPORT_MODULE()
 
 RCT_EXPORT_METHOD(add:(NSDictionary*)boundary addWithResolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-    if (CLLocationManager.authorizationStatus != kCLAuthorizationStatusAuthorizedAlways) {
+    if (CLLocationManager.authorizationStatus != kCLAuthorizationStatusAuthorizedAlways && CLLocationManager.authorizationStatus != kCLAuthorizationStatusAuthorizedWhenInUse) {
         [self.locationManager requestAlwaysAuthorization];
     }
 
-    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways ||
+        [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse) {
         NSString *id = boundary[@"id"];
         CLLocationCoordinate2D center = CLLocationCoordinate2DMake([boundary[@"lat"] doubleValue], [boundary[@"lng"] doubleValue]);
         CLRegion *boundaryRegion = [[CLCircularRegion alloc]initWithCenter:center
